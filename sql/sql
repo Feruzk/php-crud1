@@ -1,0 +1,11 @@
+create database mydata2;
+
+use mydata2;
+
+create table if not exists 'user'(
+  id serial,
+  login_id varchar (256) not null,
+  name varchar (256) not null,
+  create_date date not null,
+  update_date date not null
+) engine=innodb default charset=utf8;
