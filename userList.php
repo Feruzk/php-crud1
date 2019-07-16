@@ -37,7 +37,7 @@
 			<a href="register.php">新規登録</a>
 		</div>
       <?php
-    		$mysqli = new mysqli('localhost', 'root', 'password', 'mydata2') or die(mysqli_error($mysqli));
+    		$mysqli = new mysqli('localhost', 'root', 'password', 'mydata') or die(mysqli_error($mysqli));
     		$result = $mysqli->query("SELECT * FROM user") or die($mysqli->error);
     	?>
         <div class="table-responsive">

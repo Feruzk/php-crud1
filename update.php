@@ -27,11 +27,11 @@
 			</tr>
 			<tr>
 				<td>ログインID</td>
-				<td><input type="text" name="login_id"></td>
+				<td><input type="text" name="login_id" value="<?=$_SESSION['login_id'];?>"></td>
 			</tr>
 			<tr>
 				<td>ユーザー名</td>
-				<td><input type="text" name="username"></td>
+				<td><input type="text" name="username" value="<?=$_SESSION['usernamee'];?>"></td>
 			</tr>
 			<tr>
 				<td>パスワード</td>

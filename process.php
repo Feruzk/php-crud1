@@ -3,11 +3,12 @@
     session_start();
 
     $id = 0;
-    $login_id = " ";
-    $username = " ";
+    $login_id = "";
+    $username = "";
     $errors = array();
 
-    $mysqli = new mysqli('localhost', 'root', 'password', 'mydata2' ) or die(mysqli_error($mysqli));
+    $mysqli = new mysqli('localhost', 'root', 'password', 'mydata' ) or die(mysqli_error($mysqli));
+    $conn = mysqli_connect('localhost', 'root', 'password', 'mydata');
     if(isset($_POST['reg'])){
       $login_id = $_POST['login_id'];
       $username = $_POST['username'];
@@ -68,10 +69,11 @@
   	$password = md5($password);
   	$query = "SELECT * FROM user WHERE login_id='$login_id' AND password='$password'";
   	$results =  $mysqli->query($query) or die($mysqli->error());
-  	if (mysqli_num_rows($results) == 1) {
 
-      $_SESSION['username'] = $login_id;
-
+  	if (mysqli_num_rows($results) > 0) {
+      while($row = $results->fetch_assoc()){
+        $_SESSION['username'] = $row['name'];
+    }
   	  header("location: userList.php");
   	}else {
   	 array_push($errors, " * ログインID又はパスワードが違います <br> もう一度お試しください");
@@ -96,6 +98,10 @@ if(isset($_GET['edit'])){
   $id = $_GET['edit'];
   $result = $mysqli->query("SELECT * FROM user WHERE id=$id") or die($mysqli->error());
   if (count($result)==1){
+    while($row = $result->fetch_assoc()){
+      $_SESSION['login_id'] = $row['login_id'];
+      $_SESSION['usernamee'] = $row['name'];
+  }
     header("location: update.php?id=".$id);
   }
   else{
@@ -109,6 +115,7 @@ if(isset($_POST['update'])){
   $username = $_POST['username'];
   $password1 =$_POST['password1'];
   $password2 =$_POST['password2'];
+
 
     if(empty($login_id)){
       array_push($errors, " * ログインIDの入力して下さい");
