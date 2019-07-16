@@ -1,14 +1,11 @@
 <?php
 
     session_start();
-
-    $id = 0;
-    $login_id = "";
-    $username = "";
+    
     $errors = array();
 
     $mysqli = new mysqli('localhost', 'root', 'password', 'mydata' ) or die(mysqli_error($mysqli));
-    $conn = mysqli_connect('localhost', 'root', 'password', 'mydata');
+   
     if(isset($_POST['reg'])){
       $login_id = $_POST['login_id'];
       $username = $_POST['username'];
